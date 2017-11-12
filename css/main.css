@@ -1,0 +1,21 @@
+.top-pad{
+    padding-top:60px;
+}
+h1{
+    font-size: 32px;
+    font-weight: normal;
+}
+.err-red{
+    color: red;
+}
+/* Form */
+label {
+    font-weight:normal;
+}
+input[disabled="disabled"]{
+  cursor: not-allowed;
+}
+/*
+input.ng-invalid.ng-touched{
+  border: 2px solid red;
+}*/

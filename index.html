@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Angular JS SPA - Single Page App</title>
+    <!-- Angular Js 1.6.6-->
+    <script src="scripts/libs/angular/angular.min.js"></script>
+    <script src="scripts/libs/angular/app.js"></script>
+    <!-- Bootstrap -->
+    <link href="scripts/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custome CSS styles -->
+    <link href="css/main.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <!-- Fixed navbar -->
+  <body>
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.php">Angular SAP! (Single Page App)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <!-- <li class="active"><a href="index.php">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>-->
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Register</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+ </header>
+<!-- Page Body starts -->
+<div class="container top-pad" ng-controller="mainController">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" class="form-control" id="search" class="md-col-3" ng-model="search">
+      </div>
+      <button type="button" ng-click="orderByFirstName('firstName')" name="button" class="btn btn-info btn-xs">Order By by First Name</button>
+      <button type="button" ng-click="orderByLastName('lastName')" name="button" class="btn btn-info btn-xs">Order By by Last Name</button>
+      <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Salary</th>
+          <th>Job</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="person in persons | orderBy:order | filter:search">
+          <td>{{(persons.indexOf(person)) +1}}</td>
+          <td>{{person.firstName}}</td>
+          <td>{{person.lastName}}</td>
+          <td>{{person.salary | currency}}</td>
+          <td>{{person.job}}</td>
+          <td><button type="button" class=" btn btn-danger btn-xs glyphicon glyphicon-remove" ng-click="removePerson(person)" /></button>
+          </td>
+        </tr>
+      </tbody>
+   </table>
+    </div><!-- /.col-md-6 -->
+    <!-- Add New Item Form-->
+    <div class="col-md-6">
+      <div class="well">
+         <h4>Add New Value</h4>
+       <form name="addForm" ng-submit="addFunc()" novalidate>
+       <div class="form-group">
+         <label for="firstName">First Name</label>
+         <input type="text" class="form-control" id="firstName" placeholder="first name" name="firstName" ng-model="newItem.firstName" required>
+         <span class="err-red" ng-show="addForm.firstName.$touched && addForm.firstName.$invalid"> enter a valid first name</span>
+       </div>
+       <div class="form-group">
+         <label for="lastName">Last Name</label>
+         <input type="text" class="form-control" id="lastName" placeholder="last name" name="lastName" ng-model="newItem.lastName" required>
+         <span class="err-red" ng-show="addForm.lastName.$touched && addForm.lastName.$invalid"> enter a valid last name</span>
+       </div>
+       <div class="form-group">
+         <label for="salary">Salary</label>
+         <input type="text" class="form-control" id="salary" placeholder="salary" name="salary" ng-model="newItem.salary" required>
+         <span class="err-red" ng-show="addForm.salary.$touched && addForm.salary.$invalid"> enter a valid salary</span>
+       </div>
+       <div class="form-group">
+         <label for="job">Job</label>
+         <input type="text" class="form-control" id="job" placeholder="job" name="job" ng-model="newItem.job" required>
+         <span class="err-red" ng-show="addForm.job.$touched && addForm.job.$invalid"> enter a valid job</span>
+       </div>
+       <p>{{errortext}}</p>
+       <button type="submit" name="submit" class="btn btn-default" ng-disabled="addForm.$invalid" disabled="disabled">Submit</button>
+     </form>
+      </div><!-- /.well -->
+    </div><!-- /.col-md-6 -->
+  </div><!-- /.row -->
+</div><!--/.container -->
+<!-- Page Body Ends -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="scripts/libs/jquery/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="scripts/libs/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
