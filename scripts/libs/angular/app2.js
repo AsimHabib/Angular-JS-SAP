@@ -7,7 +7,7 @@ myApp.controller('mainController',['$scope', '$http', function($scope,$http){
    $scope.persons = [];
 
    // get the data from JSON file using $http service
-   $http.get("data/data.json")
+   $http.get("data/data2.json")
      .then(function(response) {
          $scope.persons = response.data;
      });
